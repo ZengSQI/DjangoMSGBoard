@@ -5,8 +5,7 @@ class MsgPost(models.Model):
     user = models.CharField(max_length=12)
     title = models.CharField(max_length=30)
     content = models.TextField()
-    datetime = models.DateTimeField(auto_now_add=True)
+    pub_date = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ['-datetime']
-
+    def __str__(self):
+        return self.title
