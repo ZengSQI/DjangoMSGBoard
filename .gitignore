@@ -64,3 +64,4 @@ target/
 #Django
 .gitignore
 db.sqlite3
+secret.py
