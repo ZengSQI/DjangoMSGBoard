@@ -6,3 +6,7 @@ class MsgForm(forms.Form):
     title = forms.CharField(max_length=50)
     content = forms.CharField()
 
+
+class CommentForm(forms.Form):
+    name = forms.CharField(max_length=20)
+    content = forms.CharField()

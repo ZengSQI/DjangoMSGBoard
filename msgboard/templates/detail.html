@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div align="center">
+  <h1>{{ msg.title }}</h1>
+    <p>{{ msg.user }}<br>{{ msg.pub_date }} </p>
+    <p>{{ msg.content }}</p>
+  <br>
+  {% for comment in msg.comment_set.all %}
+    	<p>{{ comment.user }}<br>{{ comment.pub_date }} </p>
+    	<p>{{ comment.content }}</p>
+  	<br>
+	{% endfor %}
+  <form action="{% url 'msgboard:comment' msg.id %}" method="post">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" name="name">
+    </fieldset>
+    <fieldset class="form-group">
+      <label for="content">Content</label>
+      <textarea class="form-control" name="content"></textarea>
+    </fieldset>
+    <button type="submit" class="btn btn-primary active">Comment</button>
+  </form>
+</div>
+{% endblock %}

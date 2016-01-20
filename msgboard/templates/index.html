@@ -19,10 +19,10 @@
     <button type="submit" class="btn btn-primary active">POST</button>
   </form>
   {% for msg in msg_list %}
-  	<h1>{{ msg.title }}</h1>
-    	<p>{{ msg.user }}<br>{{ msg.pub_date }} </p>
-    	<p>{{ msg.content }}</p>
-  	<br>
+    <a href="{% url 'msgboard:detail' msg.id %}"><h1>{{ msg.title }}</h1></a>
+      <p>{{ msg.user }}<br>{{ msg.pub_date }}</p>
+      <p>{{ msg.content }}</p>
+    <br>
 	{% endfor %}
 </div>
 {% endblock %}
