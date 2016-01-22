@@ -1,9 +1,11 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 	<script src="https://code.jquery.com/jquery.min.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link href="{% static 'css/msgboard.css' %}" rel="stylesheet">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   {% block title %}
@@ -11,7 +13,12 @@
   {% endblock %}
 </head>
 <body>
+  <div class="page-header">
+    <h1><a href="/msgboard/">Message Board</a></h1>
+  </div>
+  <div class="content">
   {% block content %}{% endblock %}
+  </div>
   {% block footer %}{% endblock %}
   {% block scripts %}{% endblock %}
 </body>

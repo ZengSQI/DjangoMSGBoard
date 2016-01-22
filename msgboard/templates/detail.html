@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div align="center">
+  <div class="content">
+  <div class="comments">
+  <a href="{% url 'msgboard:index' %}">Home</a>
   <h1>{{ msg.title }}</h1>
-    <p>{{ msg.user }}<br>{{ msg.pub_date }} </p>
-    <p>{{ msg.content }}</p>
+    <p class="date">{{ msg.pub_date }} </p>
+    <p class="author">{{ msg.user }}</p>
+    <p class="msg_content">{{ msg.content }}</p>
   <br>
   {% for comment in msg.comment_set.all %}
-    	<p>{{ comment.user }}<br>{{ comment.pub_date }} </p>
-    	<p>{{ comment.content }}</p>
+    <p>B{{ comment.id }}</p>
+    <p class="date">{{ comment.pub_date }} </p>
+    <p class="author">{{ comment.user }}</p>
+    	<p class="msg_content">{{ comment.content }}</p>
   	<br>
 	{% endfor %}
-  <form action="{% url 'msgboard:comment' msg.id %}" method="post">
+  </div>
+  <form class="comment-form" action="{% url 'msgboard:comment' msg.id %}" method="post">
     {% csrf_token %}
     <fieldset class="form-group">
       <label for="name">Name</label>
@@ -23,5 +29,5 @@
     </fieldset>
     <button type="submit" class="btn btn-primary active">Comment</button>
   </form>
-</div>
+  </div>
 {% endblock %}

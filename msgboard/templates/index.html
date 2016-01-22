@@ -1,28 +1,30 @@
 {% extends 'base.html' %}
+{% load form_filters %}
 
 {% block content %}
-<div align="center">
-  <form action="post/" method="post">
+  <div class="messages">
+  {% for msg in msg_list %}
+    <a href="{% url 'msgboard:detail' msg.id %}"><h1>{{ msg.title }}</h1></a>
+      <p class="date">{{ msg.pub_date }}</p>
+      <p class="author">{{ msg.user }}</p>
+      <p class="msg_content">{{ msg.content }}</p>
+    <br>
+	{% endfor %}
+  </div>
+  <form class="post-form" action="post/" method="post">
     {% csrf_token %}
     <fieldset class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" name="name">
+      <label for="name">Name:</label>
+      {{ msg_form.name|add_class:"form-control" }}
     </fieldset>
     <fieldset class="form-group">
-      <label for="title">Title</label>
-      <input type="text" class="form-control" name="title">
+      <label for="title">Title:</label>
+      {{ msg_form.title|add_class:"form-control" }}
     </fieldset>
     <fieldset class="form-group">
-      <label for="content">Content</label>
-      <textarea class="form-control" name="content"></textarea>
+      <label for="content">Content:</label>
+      {{ msg_form.content|add_class:"form-control" }}
     </fieldset>
     <button type="submit" class="btn btn-primary active">POST</button>
   </form>
-  {% for msg in msg_list %}
-    <a href="{% url 'msgboard:detail' msg.id %}"><h1>{{ msg.title }}</h1></a>
-      <p>{{ msg.user }}<br>{{ msg.pub_date }}</p>
-      <p>{{ msg.content }}</p>
-    <br>
-	{% endfor %}
-</div>
 {% endblock %}

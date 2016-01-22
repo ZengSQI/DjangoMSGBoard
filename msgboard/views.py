@@ -9,7 +9,9 @@ from .form import MsgForm, CommentForm
 
 def index(request):
     msg_list = MsgPost.objects.order_by('-pub_date')
-    context = {'msg_list': msg_list}
+    form = MsgForm()
+    context = {'msg_list': msg_list,
+               'msg_form': form}
     return render(request, 'index.html', context)
 
 
