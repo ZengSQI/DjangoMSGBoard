@@ -13,21 +13,21 @@
     <p>B{{ comment.id }}</p>
     <p class="date">{{ comment.pub_date }} </p>
     <p class="author">{{ comment.user }}</p>
+      {% autoescape off %}
     	<p class="msg_content">{{ comment.content }}</p>
+      {% endautoescape %}
   	<br>
 	{% endfor %}
   </div>
+  {% if request.user.is_authenticated %}
   <form class="comment-form" action="{% url 'msgboard:comment' msg.id %}" method="post">
     {% csrf_token %}
-    <fieldset class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" name="name">
-    </fieldset>
     <fieldset class="form-group">
       <label for="content">Content</label>
       <textarea class="form-control" name="content"></textarea>
     </fieldset>
     <button type="submit" class="btn btn-primary active">Comment</button>
   </form>
+  {% endif %}
   </div>
 {% endblock %}

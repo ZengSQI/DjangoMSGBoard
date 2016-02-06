@@ -7,16 +7,15 @@
     <a href="{% url 'msgboard:detail' msg.id %}"><h1>{{ msg.title }}</h1></a>
       <p class="date">{{ msg.pub_date }}</p>
       <p class="author">{{ msg.user }}</p>
+      {% autoescape off %}
       <p class="msg_content">{{ msg.content }}</p>
+      {% endautoescape %}
     <br>
 	{% endfor %}
   </div>
+  {% if request.user.is_authenticated %}
   <form class="post-form" action="post/" method="post">
     {% csrf_token %}
-    <fieldset class="form-group">
-      <label for="name">Name:</label>
-      {{ msg_form.name|add_class:"form-control" }}
-    </fieldset>
     <fieldset class="form-group">
       <label for="title">Title:</label>
       {{ msg_form.title|add_class:"form-control" }}
@@ -27,4 +26,5 @@
     </fieldset>
     <button type="submit" class="btn btn-primary active">POST</button>
   </form>
+  {% endif %}
 {% endblock %}
